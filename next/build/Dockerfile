@@ -1,11 +1,8 @@
 FROM node:lts-alpine3.16
 #基本的に最新のLTSversionを持ってくる
+
+COPY ./next/src/catan/ /src/catan/
+
 WORKDIR /src/catan
 
-COPY ./next/src/catan/package.json /src/catan/package.json
-
-RUN npm install -g npm@latest && npm install create-next-app
-
-COPY ./next/src/catan /src/catan/
-
-RUN npm install
+RUN npm install -g npm@latest && npm install

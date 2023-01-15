@@ -10,7 +10,7 @@ services:
       - ./go/src/catan:/go/src/catan
     ports:
       - "8080:8080"
-    command: sh -c "npm install && go run server.go"
+    command: sh -c "go run server.go"
     tty: true
     env_file: # .envファイル
       - ./go/build/.go_env
@@ -26,18 +26,18 @@ services:
       - ./next/src:/src 
     ports:
       - "3000:3000"
-    command: sh -c "npm run dev"
+    command: sh -c "npm run dev && sh"
     stdin_open: true
     tty: true
 
   postgres:
-    user: 5050:5050
+    user: root
     container_name: postgres
     build: 
       context: .
       dockerfile: ./postgres/build/Dockerfile
-    volumes:
-      - ./postgres/src:/var/lib/postgresql/data
+    # volumes:
+    #   - ./postgres/src:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
@@ -49,15 +49,15 @@ services:
     tty: true
   
   pgadmin:
-    user: 5050:5050
+    user: root
     container_name: pgadmin
     build: 
       context: .
       dockerfile: ./pgadmin/build/Dockerfile
     ports:
         - "8888:80"
-    volumes:
-        - ./pgadmin/src:/var/lib/pgadmin
+    # volumes:
+    #     - ./pgadmin/src:/var/lib/pgadmin
     environment:
         PGADMIN_DEFAULT_EMAIL: 999999999@gmail.com
         PGADMIN_DEFAULT_PASSWORD: pass
