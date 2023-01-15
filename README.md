@@ -3,11 +3,8 @@
 
 ## memo
 それっぽいやつ作ったけど、postgresのデータ永続化できてない。
-以下二つのpermission errorが出てきたので一旦gitignoreしてる。
-- `postgres/src/*`
-- `pgadmin/src/*`
 
-それに伴ってmkdirしないとdocker-compose走らない。
+./postgres/init_sql/init.sqlを読み込んで初期データを準備する、もできてない
 
 ## how 
 

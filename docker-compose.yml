@@ -36,7 +36,8 @@ services:
     build: 
       context: .
       dockerfile: ./postgres/build/Dockerfile
-    # volumes:
+    volumes:
+      - ./postgres/init_sql://docker-entrypoint-initdb.d
     #   - ./postgres/src:/var/lib/postgresql/data
     ports:
       - "5432:5432"
