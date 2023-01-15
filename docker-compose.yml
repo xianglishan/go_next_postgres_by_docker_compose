@@ -1,0 +1,60 @@
+version: '3' 
+
+services:
+  go: # サービス名
+    container_name: go
+    build: # ビルドに使うDockerファイルのパス
+      context: .
+      dockerfile: ./go/build/Dockerfile
+    volumes: # マウントディレクトリ
+      - ./go/src/catan:/go/src/catan
+      - ~/.gitconfig:/root/.gitconfig
+    tty: true
+    env_file: # .envファイル
+      - ./go/build/.go_env
+    environment:
+      - TZ=Asia/Tokyos
+
+  next:
+    container_name: next
+    build: 
+      context: .
+      dockerfile: ./next/build/Dockerfile
+    volumes:
+      - ./next/src:/src 
+    ports:
+      - "3000:3000"
+    command: sh -c "npm run dev"
+    stdin_open: true
+    tty: true
+
+  postgres:
+    container_name: postgres
+    build: 
+      context: .
+      dockerfile: ./postgres/build/Dockerfile
+    volumes:
+      - ./postgres/src/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=postgres 
+      - POSTGRES_DB=db01
+      - TZ="Asia/Tokyo"
+  
+  pgadmin:
+    container_name: pgadmin
+    build: 
+      context: .
+      dockerfile: ./pgadmin/build/Dockerfile
+    ports:
+        - "8888:80"
+    volumes:
+        - ./pgadmin/src:/var/lib/pgadmin
+    environment:
+        PGADMIN_DEFAULT_EMAIL: 999999999@gmail.com
+        PGADMIN_DEFAULT_PASSWORD: pass
+    depends_on:
+      - postgres
+    hostname: pgadmin

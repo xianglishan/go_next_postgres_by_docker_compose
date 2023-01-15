@@ -1,0 +1,13 @@
+type Query {
+  user(id: ID): User!
+}
+
+type User {
+  user_id:ID!
+  mail:String!
+  name:String!
+  pass:String!
+  status:String
+  level:Int
+  history:String
+}
