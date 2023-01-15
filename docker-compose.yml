@@ -8,7 +8,9 @@ services:
       dockerfile: ./go/build/Dockerfile
     volumes: # マウントディレクトリ
       - ./go/src/catan:/go/src/catan
-      - ~/.gitconfig:/root/.gitconfig
+    ports:
+      - "8080:8080"
+    command: sh -c "go run server.go"
     tty: true
     env_file: # .envファイル
       - ./go/build/.go_env
@@ -29,12 +31,13 @@ services:
     tty: true
 
   postgres:
+    user: root
     container_name: postgres
     build: 
       context: .
       dockerfile: ./postgres/build/Dockerfile
     volumes:
-      - ./postgres/src/data:/var/lib/postgresql/data
+      - ./postgres/src:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
@@ -42,6 +45,8 @@ services:
       - POSTGRES_USER=postgres 
       - POSTGRES_DB=db01
       - TZ="Asia/Tokyo"
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    tty: true
   
   pgadmin:
     container_name: pgadmin
@@ -57,4 +62,4 @@ services:
         PGADMIN_DEFAULT_PASSWORD: pass
     depends_on:
       - postgres
-    hostname: pgadmin
+    tty: true
