@@ -19,14 +19,6 @@ mkdir ./postgres/src
 docker-compose up -d --build
 ```
 
-もしかしたらpermission errorなので適当に以下必要かも（よくわからん）
-
-`sudo chmod 777 ./pgadmin/src/`
-
-`sudo chmod 777 ./postgres/src/`
-
-
-
 ## postgresql
 
 `localhost:5432`

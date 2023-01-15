@@ -10,7 +10,7 @@ services:
       - ./go/src/catan:/go/src/catan
     ports:
       - "8080:8080"
-    command: sh -c "go run server.go"
+    command: sh -c "npm install && go run server.go"
     tty: true
     env_file: # .envファイル
       - ./go/build/.go_env
@@ -31,7 +31,7 @@ services:
     tty: true
 
   postgres:
-    user: root
+    user: 5050:5050
     container_name: postgres
     build: 
       context: .
@@ -49,6 +49,7 @@ services:
     tty: true
   
   pgadmin:
+    user: 5050:5050
     container_name: pgadmin
     build: 
       context: .
