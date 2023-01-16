@@ -1,8 +1,8 @@
 -- SCHEMA: Catan_dev
-CREATE SCHEMA IF NOT EXISTS "Catan_dev"
-    AUTHORIZATION postgres;
+CREATE SCHEMA IF NOT EXISTS "catan_dev";
 
-ALTER USER postgres SET search_path TO "Catan_dev";	
+-- ALTER USER postgres SET search_path TO "Catan_dev";	
+SET search_path = "catan_dev";
 
 -- CREATE
 create table chance_card_master(
