@@ -4,7 +4,8 @@
 ## memo
 それっぽいやつ作ったけど、postgresのデータ永続化できてない。
 
-./postgres/init_sql/init.sqlを読み込んで初期データを準備する、もできてない
+./postgres/init_sql/init.sqlを読み込んで初期データを準備する
+　⇒　できた
 
 ## how 
 
