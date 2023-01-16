@@ -9,10 +9,9 @@
 ## how 
 
 ```bash
-git clone https://github.com/xianglishan/go_docker.git
-cd ./go_docker
-mkdir ./pgadmin/src
-mkdir ./postgres/src
+git clone https://github.com/xianglishan/go_next_postgres_by_docker_compose.git
+mv ./go_next_postgres_by_docker_compose ./catan
+cd ./catan
 docker-compose up -d --build
 ```
 
